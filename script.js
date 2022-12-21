@@ -1,37 +1,37 @@
 class Snake {
   constructor(x, y, size) {
-    this.x = x;
-    this.y = y;
+    this.x = x
+    this.y = y
     this.size = size;
     this.tail = [{x:this.x, y:this.y}]
-    this.rotateX = 0;
-    this.rotateY = 1;
+    this.rotateX = 0
+    this.rotateY = 1
   }
 
   move() {
     let newRect;
     if (this.rotateX == 1) {
       newRect = {
-        x:this.tail[this.tail.length - 1].x + this.size,
-        y:this.tail[this.tail.length - 1].y
+        x: this.tail[this.tail.length - 1].x + this.size,
+        y: this.tail[this.tail.length - 1].y
       }
 
     } else if (this.rotateX == -1) {
       newRect = {
-        x:this.tail[this.tail.length - 1].x - this.size,
-        y:this.tail[this.tail.length - 1].y
+        x: this.tail[this.tail.length - 1].x - this.size,
+        y: this.tail[this.tail.length - 1].y
       }
 
     } else if (this.rotateY == 1) {
       newRect = {
-        x:this.tail[this.tail.length - 1].x,
-        y:this.tail[this.tail.length - 1].y + this.size
+        x: this.tail[this.tail.length - 1].x,
+        y: this.tail[this.tail.length - 1].y + this.size
       }
 
     } else if (this.rotateY == -1) {
       newRect = {
-        x:this.tail[this.tail.length - 1].x,
-        y:this.tail[this.tail.length - 1].y - this.size
+        x: this.tail[this.tail.length - 1].x,
+        y: this.tail[this.tail.length - 1].y - this.size
       }
     }
 
@@ -43,6 +43,7 @@ class Snake {
 class Apple {
   constructor() {
     let isTouching;
+    
     while(true) {
       isTouching = false;
       this.x = Math.floor(Math.random() * canvas.width / snake.size) * snake.size;
@@ -53,21 +54,22 @@ class Apple {
           isTouching = true;
         }
       }
+      console.log(this.x, this.y)
 
       if (!isTouching) {
         break;
       }
       
-      this.color = "pink";
+      this.color = "red";
       this.size = snake.size;
     }
   }
 }
 
-const canvas = document.getElementById('canvas');
-const snake = new Snake();
-const apple = new Apple();
-const canvasContext = canvas.getContext('2d');
+let canvas = document.getElementById('canvas');
+let snake = new Snake(20, 20, 20);
+let apple = new Apple();
+let canvasContext = canvas.getContext('2d');
 
 window.onload = () => {
   gameLoop();
@@ -85,7 +87,16 @@ function show() {
 function update() {
   canvasContext.clearRect(0, 0, canvas.width, canvas.height)
   console.log("update")
-  snake.move();
+  snake.move()
+  eatApple()
+}
+
+function eatApple() {
+  if (snake.tail[snake.tail.length - 1].x == apple.x &&
+      snake.tail[snake.tail.length - 1].y == apple.y) {
+        snake.tail[snake.tail.length] = {x: apple.x, y: apple.y}
+        apple = new Apple()
+      }
 }
 
 function draw() {
@@ -104,11 +115,11 @@ function draw() {
   canvasContext.font = "20px Arial";
   canvasContext.fillStyle = "#00FF42";
   canvasContext.fillText(
-    "Score: ",
-    (snake.tail.length + 1),
+    "Score: "+
+    (snake.tail.length - 1),
     canvas.width - 120, 18
   );
-  createRect(apple.x, apple.y, apple.size, apple.size, apple.color);
+  createRect(apple.x, apple.y, 20, 20, "red");
 }
 
 function createRect(x, y, width, height, color) {
