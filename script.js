@@ -45,14 +45,24 @@ class Apple {
     let isTouching;
     while(true) {
       isTouching = false;
-      this.x = Math.floor(Math.random() * canvas.width / snake.size) * snake.size
-      this.y = Math.floor(Math.random() * canvas.height / snake.size) * snake.size
-    }
+      this.x = Math.floor(Math.random() * canvas.width / snake.size) * snake.size;
+      this.y = Math.floor(Math.random() * canvas.height / snake.size) * snake.size;
 
+      for (let i = 0; i < snake.tail.length; i++) {
+        if (this.x == snake.tail[i].x && this.y == snake.tail[i].y) {
+          isTouching = true;
+        }
+      }
+
+      if (!isTouching) {
+        break;
+      }
+      
+      this.color = "pink";
+      this.size = snake.size;
+    }
   }
 }
-
-
 
 const canvas = document.getElementById('canvas');
 const snake = new Snake();
@@ -70,5 +80,17 @@ function gameLoop() {
 function show() {
   update();
   draw();
+}
+
+function update() {
+
+}
+
+function draw() {
+  createRect(0, 0, canvas.width, canvas.height, "black");
+  createRect(0, 0, canvas.width, canvas.height);
+  for (let i = 0; i < snake.tail.length; i++) {
+
+  }
 }
 
