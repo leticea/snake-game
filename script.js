@@ -56,12 +56,12 @@ class Apple {
       }
       console.log(this.x, this.y)
 
+      this.size = snake.size;
+      this.color = "red";
+
       if (!isTouching) {
         break;
-      }
-      
-      this.color = "red";
-      this.size = snake.size;
+      }      
     }
   }
 }
@@ -119,7 +119,7 @@ function draw() {
     (snake.tail.length - 1),
     canvas.width - 120, 18
   );
-  createRect(apple.x, apple.y, 20, 20, "red");
+  createRect(apple.x, apple.y, apple.size, apple.size, apple.color);
 }
 
 function createRect(x, y, width, height, color) {
