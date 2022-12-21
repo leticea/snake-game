@@ -85,10 +85,28 @@ function show() {
 }
 
 function update() {
-  canvasContext.clearRect(0, 0, canvas.width, canvas.height)
-  console.log("update")
-  snake.move()
-  eatApple()
+  canvasContext.clearRect(0, 0, canvas.width, canvas.height);
+  console.log("update");
+  snake.move();
+  eatApple();
+  checkHitWall();
+}
+
+function checkHitWall() {
+  let headTail = snake.tail[snake.tail.length - 1]
+  
+  if (headTail.x == - snake.size) {
+    head.tail.x = canvas.width - snake.size
+
+  } else if (headTail.x == - canvas.width) {
+    head.tail.x = 0
+
+  } else if (headTail.y == - snake.size) {
+    head.tail.y = canvas.height - snake.size
+
+  } else if (headTail.y == canvas.height) {
+    head.tail.y = 0
+  }
 }
 
 function eatApple() {
