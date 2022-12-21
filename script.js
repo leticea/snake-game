@@ -54,7 +54,6 @@ class Apple {
           isTouching = true;
         }
       }
-      console.log(this.x, this.y)
 
       this.size = snake.size;
       this.color = "red";
@@ -76,7 +75,7 @@ window.onload = () => {
 }
 
 function gameLoop() {
-  setInterval(show, 1000/15) // [here 15 is our fps value]
+  setInterval(show, 1000/15);
 }
 
 function show() {
@@ -92,23 +91,6 @@ function update() {
   checkHitWall();
 }
 
-function checkHitWall() {
-  let headTail = snake.tail[snake.tail.length - 1]
-  
-  if (headTail.x == - snake.size) {
-    head.tail.x = canvas.width - snake.size
-
-  } else if (headTail.x == - canvas.width) {
-    head.tail.x = 0
-
-  } else if (headTail.y == - snake.size) {
-    head.tail.y = canvas.height - snake.size
-
-  } else if (headTail.y == canvas.height) {
-    head.tail.y = 0
-  }
-}
-
 function eatApple() {
   if (snake.tail[snake.tail.length - 1].x == apple.x &&
       snake.tail[snake.tail.length - 1].y == apple.y) {
@@ -116,6 +98,25 @@ function eatApple() {
         apple = new Apple()
       }
 }
+
+function checkHitWall() {
+  let headTail = snake.tail[snake.tail.length - 1]
+
+  if (headTail.x == - snake.size) {
+    headTail.x = canvas.width - snake.size;
+
+  } else if (headTail.x == - canvas.width) {
+    headTail.x = 0;
+
+  } else if (headTail.y == - snake.size) {
+    headTail.y = canvas.height - snake.size;
+
+  } else if (headTail.y == canvas.height) {
+    headTail.y = 0;
+  }
+}
+
+
 
 function draw() {
   createRect(0, 0, canvas.width, canvas.height, "black");
@@ -132,11 +133,7 @@ function draw() {
 
   canvasContext.font = "20px Arial";
   canvasContext.fillStyle = "#00FF42";
-  canvasContext.fillText(
-    "Score: "+
-    (snake.tail.length - 1),
-    canvas.width - 120, 18
-  );
+  canvasContext.fillText("Score: " + (snake.tail.length - 1), canvas.width - 120, 18);
   createRect(apple.x, apple.y, apple.size, apple.size, apple.color);
 }
 
