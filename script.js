@@ -89,8 +89,19 @@ function update() {
 function draw() {
   createRect(0, 0, canvas.width, canvas.height, "black");
   createRect(0, 0, canvas.width, canvas.height);
-  for (let i = 0; i < snake.tail.length; i++) {
 
+  for (let i = 0; i < snake.tail.length; i++) {
+    createRect(
+      snake.tail[i].x + 2.5,
+      snake.tail[i].y + 2.5,
+      snake.size - 5,
+      snake.size - 5, 'white'
+    )
   }
 }
+
+function createRect(x, y, width, height) {
+  
+}
+
 
