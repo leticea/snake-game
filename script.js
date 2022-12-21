@@ -83,7 +83,7 @@ function show() {
 }
 
 function update() {
-
+  snake.move();
 }
 
 function draw() {
@@ -114,5 +114,14 @@ function createRect(x, y, width, height, color) {
   canvasContext.fillStyle = color;
   canvasContext.fillRect(x, y, width, height);
 }
+
+window.addEventListener("keydown", (event) => {
+  setTimeout(() => {
+    if (event.keyCode == 37 && snake.rotateX != 1) {
+      snake.rotateX = 1;
+      snake.rotateY = 0;
+    }
+  }, 1)
+})
 
 
